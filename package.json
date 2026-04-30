@@ -1,0 +1,25 @@
+{
+  "name": "isgb17-lab01",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/DotSnuk/ISGB17-lab01#readme",
+  "bugs": {
+    "url": "https://github.com/DotSnuk/ISGB17-lab01/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DotSnuk/ISGB17-lab01.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "jsdom": "^29.1.0"
+  }
+}
