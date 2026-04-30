@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-app.use('public/', __dirname + '/static');
+app.use('public/', __dirname + '/static'); // check to see if this works
 app.get('/', (req, res) => {
   try {
   } catch (err) {}
