@@ -8,9 +8,12 @@ const fs = require('fs');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-app.use('public/', __dirname + '/static'); // check to see if this works
+app.use('/public/', express.static(__dirname + '/static'));
 app.get('/', (req, res) => {
   try {
+    res.sendFile(__dirname + '/static/html/index.html', (err) => {
+      if (err) console.log(err);
+    });
   } catch (err) {}
 });
 
