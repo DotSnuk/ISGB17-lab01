@@ -15,7 +15,8 @@ app.use(cookieParser());
 function validateForm(req, res, next) {
   try {
     if (req.body === undefined) throw new Error('No data sent');
-    const name = req.body.name_1;
+    const name = req.body.nick_1;
+    console.log(req.body);
     const color = req.body.color_1;
     if (name === undefined) throw new Error('Nickname saknas!');
     if (color === undefined) throw new Error('Färg saknas!');
@@ -41,8 +42,12 @@ function createCookie(req, res, next) {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 2,
   });
+  res.cookie('color', req.body.color_1, {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 2,
+  });
 
-  res.send('Logged in');
+  res.redirect('/');
 }
 
 /* endpoints */
