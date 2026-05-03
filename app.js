@@ -7,10 +7,12 @@ const globalObject = require('./servermodules/game-modul.js');
 const fs = require('fs');
 
 const app = express();
+/* middlewares */
 app.use(express.urlencoded({ extended: true }));
 app.use('/public/', express.static(__dirname + '/static'));
 app.use(cookieParser());
 
+/* endpoints */
 app.post('/', (req, res) => {});
 
 app.get('/', (req, res) => {
