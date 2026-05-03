@@ -13,7 +13,23 @@ app.use('/public/', express.static(__dirname + '/static'));
 app.use(cookieParser());
 
 /* endpoints */
-app.post('/', (req, res) => {});
+app.post('/', (req, res) => {
+  try {
+    if (req.body === undefined) throw new Error('No data sent');
+    const name = req.body.name_1;
+    const color = req.body.color_1;
+    if (name === undefined) throw new Error('Nickname saknas!');
+    if (color === undefined) throw new Error('Färg saknas!');
+    if (name.trim().length < 3)
+      throw new Error('Nickname ska vara minst tre tecken långt!');
+    if (color.trim().length !== 7)
+      throw new Error('Färg ska innehålla sju tecken!');
+    if (color.trim() === '#FFFFFF' || color.trim() === '#000000')
+      throw new Error('Ogiltig färg!');
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 app.get('/', (req, res) => {
   try {
