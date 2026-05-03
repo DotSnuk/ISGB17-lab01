@@ -49,6 +49,11 @@ function createCookie(req, res, next) {
 app.post('/', validateForm, comparePlayers, createCookie);
 
 app.get('/', (req, res) => {
+	if(req.cookies.color && req.cookies.nickName)
+		res.sendFIle(__dirname + '/static/html/index.html');
+	else
+		re.sendFile(__dirname + '/static/html/loggain.html');
+/*
   try {
     res.sendFile(__dirname + '/static/html/index.html', (err) => {
       if (err) throw new Error('Cant open index.html');
@@ -56,7 +61,9 @@ app.get('/', (req, res) => {
   } catch (err) {
     console.error(err);
   }
+  */
 });
+
 
 app.get('/reset', (req, res) => {});
 
