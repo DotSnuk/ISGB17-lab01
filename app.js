@@ -7,11 +7,46 @@ const globalObject = require('./servermodules/game-modul.js');
 const fs = require('fs');
 
 const app = express();
+/* middlewares */
 app.use(express.urlencoded({ extended: true }));
 app.use('/public/', express.static(__dirname + '/static'));
 app.use(cookieParser());
 
-app.post('/', (req, res) => {});
+function validateForm(req, res, next) {
+  try {
+    if (req.body === undefined) throw new Error('No data sent');
+    const name = req.body.name_1;
+    const color = req.body.color_1;
+    if (name === undefined) throw new Error('Nickname saknas!');
+    if (color === undefined) throw new Error('Färg saknas!');
+    if (name.trim().length < 3)
+      throw new Error('Nickname ska vara minst tre tecken långt!');
+    if (color.trim().length !== 7)
+      throw new Error('Färg ska innehålla sju tecken!');
+    if (color.trim() === '#FFFFFF' || color.trim() === '#000000')
+      throw new Error('Ogiltig färg!');
+    next();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function comparePlayers(req, res, next) {
+  /* compare players */
+  next();
+}
+
+function createCookie(req, res, next) {
+  res.cookie('nickName', req.body.name_1, {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 2,
+  });
+
+  res.send('Logged in');
+}
+
+/* endpoints */
+app.post('/', validateForm, comparePlayers, createCookie);
 
 app.get('/', (req, res) => {
   try {
