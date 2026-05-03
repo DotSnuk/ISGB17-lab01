@@ -9,6 +9,8 @@ const fs = require('fs');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use('/public/', express.static(__dirname + '/static'));
+app.use(cookieParser());
+
 app.get('/', (req, res) => {
   try {
     res.sendFile(__dirname + '/static/html/index.html', (err) => {
